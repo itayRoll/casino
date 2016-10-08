@@ -1,17 +1,14 @@
-<html>
-	<head>
-		<title>Itay's first site</title>
-	</head>
-	<body>
-		<div>
-			<h1><a href="">CASINO PLATFORM</a></h1>
-		</div>
+{%  extends 'casino/base.html' %}
 
-		<div>
-			<!-- {{bets}} -->
-			{% for bet in bets %}
-				{{bet}}<br>
-			{%endfor%}
+{% block content %}
+	{% for bet in bets %}
+		<div class="post">
+			<h2><a href="">{{ bet.creator }}</a></h2>
+			<p>{{ bet }}</p>
+			<div class="date">
+	    		<p>Last modified: {{ bet.last_modified }}</p>
+			</div>
+			<div class="line-separator"></div>
 		</div>
-	</body>
-</html>
+	{% endfor %}
+{% endblock %}
