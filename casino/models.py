@@ -3,7 +3,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.utils import timezone
 from datetime import datetime
-# Create your models here.
+from django.contrib.auth.models import User
 
 class Competition(models.Model):
 	start_time = models.DateTimeField()
@@ -22,9 +22,9 @@ class Bet(models.Model):
 		('X', 'TIE'),
 		('2', 'AWAY-WIN'),
 	)
-	creator = models.ForeignKey('auth.User')
-	time_created = models.DateTimeField(editable=False) 	# maybe redubndant
-	last_modified = models.DateTimeField()
+	creator = models.ForeignKey(User)
+	time_created = models.DateTimeField(editable=False, default=timezone.now()) 	# maybe redubndant
+	last_modified = models.DateTimeField(default=timezone.now())
 	match = models.ForeignKey('Competition')
 	res = models.CharField(max_length=1, choices=RESULTS, blank=False)
 
@@ -48,4 +48,9 @@ class Bet(models.Model):
 		if not self.id:
 			self.time_created = timezone.now()
 		self.last_modified = timezone.now()
-		return super(User, self).save(*args, **kwargs)
+		return super(Bet, self).save(*args, **kwargs)
+
+	def __str__(self):
+		return '{0} vs. {1},  {2}-{3}-{4} starting at {5}:{6} - {7}'.format(self.match.home_team, self.match.away_team,
+				self.match.start_time.year, self.match.start_time.month, self.match.start_time.day,
+				self.match.start_time.hour, self.match.start_time.minute, self.res)

@@ -19,5 +19,5 @@ from casino import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', views.bet_list, name='bet_list'),
+    url(r'^bets/', views.bet_list, name='bet_list'),
 ]
