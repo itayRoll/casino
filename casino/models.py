@@ -50,7 +50,10 @@ class Bet(models.Model):
 		self.last_modified = timezone.now()
 		return super(Bet, self).save(*args, **kwargs)
 
-	def __str__(self):
-		return '{0} vs. {1},  {2}-{3}-{4} starting at {5}:{6} - {7}'.format(self.match.home_team, self.match.away_team,
+	def hidden_res(self):
+		return '{0} vs. {1}, {2}-{3}-{4} starting at {5}:{6}'.format(self.match.home_team, self.match.away_team,
 				self.match.start_time.year, self.match.start_time.month, self.match.start_time.day,
-				self.match.start_time.hour, self.match.start_time.minute, self.res)
+				self.match.start_time.hour, self.match.start_time.minute)
+
+	def shown_res(self):
+		return '{0} | {1}'.format(self.hidden_res(), self.res)

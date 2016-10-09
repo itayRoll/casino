@@ -2,6 +2,8 @@
 <html>
 	<head>
 		<title>Itay's first site</title>
+  		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
 		<link href="//fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,latin-ext" rel="stylesheet" type="text/css">
@@ -10,7 +12,7 @@
 	</head>
 	<body>
 		<div class="page-header">
-			<h1><a href="">Casino Platform --LOGO HERE--</a></h1>
+			<h1><a href="{% url 'bet_list' %}">Casino Platform --LOGO HERE--</a></h1>
 		</div>
 
 		<div class="content container">
@@ -20,6 +22,11 @@
             		{% endblock %}
 				</div>
 			</div>
+		</div>
+		<div class="page-ender">
+			{% if user.is_authenticated %}
+				<a href="{% url 'bet_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
+			{% endif %}
 		</div>
 	</body>
 </html>

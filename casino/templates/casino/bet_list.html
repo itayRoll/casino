@@ -4,7 +4,11 @@
 	{% for bet in bets %}
 		<div class="post">
 			<h2><a href="">{{ bet.creator }}</a></h2>
-			<p>{{ bet }}</p>
+			{% if bet.creator.username == user.username %}
+				<p> {{bet.shown_res}} </p>
+			{% else %}
+				<p> {{bet.hidden_res}} </p>
+			{% endif %}
 			<div class="date">
 	    		<p>Last modified: {{ bet.last_modified }}</p>
 			</div>
