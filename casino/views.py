@@ -21,10 +21,11 @@ from django.shortcuts import redirect
 
 
 def bet_list(request):
-	if ONLY_FUTURE_GAMES:
-		bets = Bet.objects.filter(match__start_time__gte=timezone.now()).order_by('-last_modified')
-	else:
-		bets = Bet.objects.all().order_by('-last_modified')
+	# if ONLY_FUTURE_GAMES:
+	# 	bets = Bet.objects.filter(match__start_time__gte=timezone.now()).order_by('-last_modified')
+	# else:
+	# 	bets = Bet.objects.all().order_by('-last_modified')
+	bets = Bet.objects.all().order_by('-last_modified')
 	return render(request, 'casino/bet_list.html', {'bets': bets})
 
 def bet_details(request, pk):
