@@ -1,0 +1,22 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>Casino | Welcome!</title>
+		<link rel="stylesheet" href="{% static 'css/login.css' %}">
+	</head>
+	<body>
+		<form id="loginform" method="post" action="{%  url 'login_user' %}">
+			{% csrf_token %}
+			{%  if err_msg %}
+				<font color="red">{{ err_msg }}</font>
+			{%  else %}
+				<p></p>
+			{%  endif %}
+			<input type="text" class="input" id="username" name="username" placeholder="Username" /> 
+			<input type="password" class="input" name="password" id="password" placeholder="Password" />
+			<input type="submit" class="loginbutton" value="SIGN IN" />
+			<input type="hidden" name="next" value="{{ request.GET.next }}" />
+		</form>
+		<a href="#">New user? Let's get started!</a>
+	</body>
+</html>

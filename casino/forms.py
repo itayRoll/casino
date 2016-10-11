@@ -5,4 +5,11 @@ class BetForm(forms.ModelForm):
 	
 	class Meta:
 		model = Bet
-		fields = ('res', 'match')
+		fields = ('match', 'res')
+
+	def is_valid(self):
+		if not super(BetForm, self).is_valid():
+			return False
+		if not self.instance.validation():
+			return False
+		return True

@@ -16,6 +16,7 @@
 
 h1 {
     font-family: 'Ubuntu Condensed';
+    float: left;
 }
 
 h2 {
@@ -27,7 +28,7 @@ h2 {
 }
 
 .save {
-    float: right;
+    float: left;
 }
 
 .top-menu, .top-menu:hover, .top-menu:visited {
@@ -56,4 +57,69 @@ h2 {
     margin-bottom: 0;
     padding: 20px 60px 20px 40px;
     float: right;
+}
+
+.nav ul {
+    *zoom:1;
+    list-style:none;
+    margin:0;
+    padding:0;
+    background:#24918a;
+    width:3.8%;
+    float: right;
+    margin-top: 50px;
+}
+.nav ul:before,.nav ul:after {
+    content:"";
+    display:table;
+}
+.nav ul:after {
+    clear:both;
+}
+.nav ul > li {
+    float:left;
+    position:relative;
+}
+.nav a {
+    display:block;
+    padding:10px 20px;
+    line-height:1.2em;
+    color:#fff;
+    border-left:1px solid #595959;
+}
+.nav a:hover {
+    text-decoration:none;
+    background:#595959;
+}
+.nav li ul {
+    background:#273754;
+}
+.nav li ul li {
+    width:200px;
+}
+.nav li ul a {
+    border:none;
+}
+.nav li ul a:hover {
+    background:rgba(0,0,0,0.2);
+}
+
+.nav li ul {
+    position:absolute;
+    left: 0;
+    top:0px;
+    width: 120%;
+    z-index:1;
+    max-height:0;
+    overflow:hidden;
+    -webkit-transform:perspective(400) rotate3d(1,0,0,-90deg);
+    -webkit-transform-origin:50% 0;
+    -webkit-transition:350ms;
+    -moz-transition:350ms;
+    -o-transition:350ms;
+    transition:350ms;
+}
+.nav ul > li:hover ul {
+    max-height:1000px;
+    -webkit-transform:perspective(400) rotate3d(0,0,0,0);
 }

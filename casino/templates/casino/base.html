@@ -1,7 +1,7 @@
 {% load staticfiles %}
 <html>
 	<head>
-		<title>Itay's first site</title>
+		<title>Casino</title>
   		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
   		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
 		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
@@ -13,6 +13,18 @@
 	<body>
 		<div class="page-header">
 			<h1><a href="{% url 'bet_list' %}">Casino Platform --LOGO HERE--</a></h1>
+			<nav class="nav">
+				<ul>
+					<li>
+						<a href="#">User</a>
+						<ul>
+							<li><a href="#">Profile</a></li>
+							<li><a href="#">Settings</a></li>
+							<li><a href="{%  url 'logout_user' %}">Logout</a></li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
 		</div>
 
 		<div class="content container">
@@ -23,10 +35,10 @@
 				</div>
 			</div>
 		</div>
-		<div class="page-ender">
+		<!-- <div class="page-ender">
 			{% if user.is_authenticated %}
 				<a href="{% url 'bet_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
 			{% endif %}
-		</div>
+		</div> -->
 	</body>
 </html>

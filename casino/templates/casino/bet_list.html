@@ -12,6 +12,10 @@
 			<div class="date">
 	    		<p>Last modified: {{ bet.last_modified }}</p>
 			</div>
+			{% if bet.creator.username == user.username %}
+				<a class="btn btn-default" href="{% url 'bet_edit' pk=bet.pk %}"><span class="glyphicon glyphicon-pencil"></span></a>
+				<p><br></p>
+			{% endif %}
 			<div class="line-separator"></div>
 		</div>
 	{% endfor %}
