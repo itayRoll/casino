@@ -8,6 +8,7 @@ from . import utils
 
 
 class League(models.Model):
+	name = models.CharField(max_length=28, blank=False, default='-')
 	api_id = models.IntegerField()
 	curr_matchday = models.IntegerField()
 
@@ -40,6 +41,9 @@ class League(models.Model):
 			else:
 				comp = Competition(start_time=dt, home_team=d['homeTeamName'], away_team=d['awayTeamName'], league=self)
 			comp.save()
+
+	def __str__(self):
+		return self.name
 
 
 

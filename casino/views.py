@@ -3,7 +3,6 @@ from .models import Bet, Competition, League
 from django.utils import timezone
 from .forms import BetForm
 from django.shortcuts import redirect
-import requests, json
 from django.http import HttpResponse, HttpResponseRedirect
 from . import macros
 from django.shortcuts import render_to_response
