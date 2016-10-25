@@ -5,17 +5,16 @@
 		<link rel="stylesheet" href="{% static 'css/login.css' %}">
 	</head>
 	<body>
-		<form id="loginform" method="post" action="{%  url 'login_user' %}">
+		<form id="loginform" method="post" action="{%  url 'register' %}">
 			{% csrf_token %}
 			{%  if err_msg %}
 				<font color="red">{{ err_msg }}</font>
 			{%  endif %}
+			<input type="text" class="input" id="email" name="email" placeholder="Email" /> 
 			<input type="text" class="input" id="username" name="username" placeholder="Username" /> 
 			<input type="password" class="input" name="password" id="password" placeholder="Password" />
-			<!-- <label><input type="checkbox"> Remember me</label> -->
-			<input type="submit" class="loginbutton" value="SIGN IN" />
+			<input type="submit" class="loginbutton" value="SIGN UP" />
 			<input type="hidden" name="next" value="{{ request.GET.next }}" />
 		</form>
-		<a href="{% url 'signup' %}">New user? Let's get started!</a>
 	</body>
 </html>

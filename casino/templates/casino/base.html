@@ -1,24 +1,29 @@
-{% load staticfiles %}
 <html>
 	<head>
+		{% load staticfiles %}
 		<title>Casino</title>
-  		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
-  		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script> -->
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+		<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link href="//fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 		<link href="//fonts.googleapis.com/css?family=Quicksand&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="//fonts.googleapis.com/css?family=Roboto&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+		<link href="//fonts.googleapis.com/css?family=Bungee+Inline&subset=latin,latin-ext" rel="stylesheet" type="text/css">
 		<link rel="stylesheet" href="{% static 'css/casino.css' %}">
+		<script src="{% static 'js/main.js' %}"></script>
+		<script type="text/javascript">
+			var CSRF_TOKEN = '{{ csrf_token }}';
+		</script>
 	</head>
 	<body>
 		<div class="page-header">
-			<h1><a href="{% url 'bet_list' %}">Casino Platform --LOGO HERE--</a></h1>
+			<h1><a href="{% url 'user_feed' %}">LongShot</a></h1>
 			<nav class="nav">
 				<ul>
 					<li>
-						<a href="#">User</a>
+						<a href="#">{{ request.user.username }}</a>
 						<ul>
-							<li><a href="#">Profile</a></li>
+							<li><a href="{%  url 'user_page' %}">Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li><a href="{%  url 'logout_user' %}">Logout</a></li>
 						</ul>
@@ -27,18 +32,24 @@
 			</nav>
 		</div>
 
-		<div class="content container">
-			<div class="row">
-				<div class="col-md-8">
+		<div id="main" class="content container">
+			<div class="row col-md-8">
+				<div>
 					{% block content %}
             		{% endblock %}
 				</div>
 			</div>
 		</div>
+
+		<script language="javascript">
+			function autoResizeDiv(){
+				document.getElementById("main").style.height = window.innerHeight + "px";
+			}
+			window.onresize = autoResizeDiv;
+			autoResizeDiv;
+		</script>
 		<!-- <div class="page-ender">
-			{% if user.is_authenticated %}
-				<a href="{% url 'bet_new' %}"><span class="glyphicon glyphicon-plus"></span></a>
-			{% endif %}
+			add social media links
 		</div> -->
 	</body>
 </html>

@@ -9,3 +9,12 @@ LEAGUE_ID_DICT = {
 
 ##########   MESSAGES  #####################
 WRONG_LOGIN = 'Incorrect username or password.'
+WRONG_ACTIVATION_KEY = 'Wrong activation key.'
+
+##########   HISTORY   #####################
+TEAM_FORM_HISTORY_NUM = 5
+ACTIVATION_KEY_LIFE_EXPECTENCY = 7
+
+
+############################################
+ACTIVATION_KEY_LENGTH = 17 # supposedly random

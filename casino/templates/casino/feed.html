@@ -1,0 +1,45 @@
+{%  extends 'casino/base.html' %}
+{% load casino_extras %}
+{% block content %}
+	<ul style="list-style-type: none">
+	{% for comp in comps %}
+		<li>
+		<div class="card">
+		<div class="card-container">
+		<div class="compUsers">
+			{% with bets=comp.groups.all.0.bets.all %}
+				<b> {{ bets|get_comp_users:user.username }} </b>
+			{% endwith %}
+		</div>
+		<div class="bet">
+			<div id="leftcontainer">
+				<div class="hoverbubbleleft">
+					<img src={{ comp.home_team.img_url }} alt="" class="homeImage" />
+					<span>Rank: {{ comp.home_team.rank }}, Points: {{ comp.home_team.points }}<br>Goals: {{ comp.home_team.goals }}, Goals Against: {{ comp.home_team.goals_against }}<br>Form: {{ comp.home_team.form }}
+					</span>
+				</div>
+			</div>
+			<h3><a id="home{{ comp.pk }}" href="{% url 'team_page' pk=comp.home_team.pk %}">{{ comp.home_team.name }}</a></h3>
+			<!-- <button type="button" class="btn-info" data-toggle="collapse" data-target="#demo">BET</button> -->
+			<!-- <button type="button" class="btn btn-info active">BET</button> -->
+			<button id="{{ comp.pk }}" class="btn-custom btn-custom-primary outline" type="button" data-toggle="collapse" data-target="#collapseExample{{ comp.pk }}" aria-expanded="false" aria-controls="collapseExample">BET
+  			</button>
+			<div class="collapse" id="collapseExample{{ comp.pk }}">
+			  <!-- <div class="card card-block" sytle="width:200px"> -->
+			  <!-- <div class="card"> -->
+			 	 <!-- <div class="card-container"> -->
+			    	<button id="betHome{{ comp.pk }}" type="button" class="btn btn-success" onclick="return placeBet(this.id)" style="margin-left: 8px"><span class="glyphicon glyphicon-chevron-left"></span></button>
+			    	<button id="betDraw{{ comp.pk }}" type="button" class="btn btn-success" onclick="return placeBet(this.id)"><span class="glyphicon glyphicon-remove"></span></button>
+			    	<button id="betAway{{ comp.pk }}" type="button" class="btn btn-success" onclick="return placeBet(this.id)"><span class="glyphicon glyphicon-chevron-right"></span></button>
+			    <!-- </div> -->
+			  <!-- </div> -->
+			</div>
+			<h3><a id="away{{ comp.pk }}" href="{% url 'team_page' pk=comp.away_team.pk %}">{{ comp.away_team.name }}</a></h3>
+			<div id="rightcontainer"><div class="hoverbubbleright"><img src={{comp.away_team.img_url}} alt="" class="awayImage" /><span>Rank: {{ comp.away_team.rank }}, Points: {{ comp.away_team.points }}<br>Goals: {{ comp.away_team.goals }}, Goals Against: {{ comp.away_team.goals_against }}<br>Form: {{ comp.away_team.form }}</span></div></div>
+		</div>
+		</div>
+		</div>
+		</li>
+	{% endfor %}
+	</ul>
+{% endblock %}

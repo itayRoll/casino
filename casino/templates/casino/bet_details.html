@@ -1,11 +1,12 @@
 {% extends 'casino/base.html' %}
 
 {% block content %}
-    <div class="post">
-		<h2><a href="">{{ bet.creator }}</a></h2>
-		{% if bet.creator.username == user.username %}
+    <div class="bet">
+    	{% if bet.creator.username == user.username %}
+			<h2><a href="{% url 'user_page' %}">{{ bet.creator }}</a></h2>
 			<p> {{bet.shown_res}} </p>
 		{% else %}
+			<h2><a href="{%  url 'ext_user_page' pk=bet.creator.pk %}">{{ bet.creator }}</a></h2>
 			<p> {{bet.hidden_res}} </p>
 		{% endif %}
 		<div class="date">

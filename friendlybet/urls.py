@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from casino import views
+from django.conf.urls.static import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -27,5 +29,19 @@ urlpatterns = [
     url(r'^bet/(?P<pk>\d+)/$', views.bet_details, name='bet_details'),
     url(r'^bet/new/$', views.bet_new, name='bet_new'),
     url(r'^bet/(?P<pk>\d+)/edit/$', views.bet_edit, name='bet_edit'),
-    # url(r'^fetch/$', views.fetch_games),
+    url(r'^fetch/$', views.fetch_games),
+    url(r'^feed/$', views.populate_user_feed, name='user_feed'),
+    url(r'^userpage/$', views.user_page, name='user_page'),
+    url(r'^user/(?P<pk>\d+)/$', views.ext_user_page, name='ext_user_page'),
+    url(r'^initeams/$', views.init_teams),
+    url(r'^clean/$', views.clean_db),
+    url(r'^initform/$', views.init_form),
+    url(r'^team/(?P<pk>\d+)/$', views.team_page, name='team_page'),
+    url(r'^activate-user/(?P<activation_key>\w+)/$', views.activate_user),
+    url(r'^signup/$', views.signup_page, name='signup'),
+    url(r'^register/$', views.register_user, name='register'),
+    url(r'^place-bet/$', views.place_bet, name='place_bet'),
+    url(r'^match-distribution/$', views.match_distribution, name='match_distribution'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
