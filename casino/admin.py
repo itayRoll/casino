@@ -6,13 +6,12 @@ admin.site.register(Bet)
 admin.site.register(League)
 admin.site.register(Team)
 admin.site.register(ActivationKey)
-admin.site.register(Group)
 admin.site.register(Gambler)
 
-class GroupInline(admin.TabularInline):
-	model = Competition.groups.through
+class BetInline(admin.TabularInline):
+	model = Competition.bets.through
 
 @admin.register(Competition)
 class CompetitionAdmin(admin.ModelAdmin):
-	inlines = (GroupInline,)
-	exclude = ('groups',)
+	inlines = (BetInline,)
+	exclude = ('bets',)

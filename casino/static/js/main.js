@@ -1,17 +1,28 @@
-function placeBet(clicked_id){
+function placeBet(clicked_id, match_start){
+  // now = Date.now();
+  // if (now > match_start){
+  //   alert("past");
+  //   return;
+  // } else {
+  //   alert("future");
+  // }
+  document.getElementById(clicked_id).disabled = true;
 	var cpk = clicked_id.substring(7);
 	var tmp = clicked_id.substring(3,7);
-	var cpk;
 	if (tmp.localeCompare("Home") == 0){
 		bet = "1";
+    document.getElementById("bet".concat("Draw").concat(cpk)).disabled = false;
+    document.getElementById("bet".concat("Away").concat(cpk)).disabled = false;
 	}
 	else if (tmp.localeCompare("Draw") == 0){
 		bet = "X";
+    document.getElementById("bet".concat("Home").concat(cpk)).disabled = false;
+    document.getElementById("bet".concat("Away").concat(cpk)).disabled = false;
 	} else {
 		bet = "2";
+    document.getElementById("bet".concat("Home").concat(cpk)).disabled = false;
+    document.getElementById("bet".concat("Draw").concat(cpk)).disabled = false;
 	}
-  var elem = document.getElementById(clicked_id);
-  elem.innerHTML = '<span id="glyphBtn" class="glyphicon glyphicon-ok"></span>';
 	$.ajax({
 				url: "/place-bet/",
 				type: 'POST',
@@ -30,4 +41,17 @@ function placeBet(clicked_id){
       			}
   			}
 		});
+}
+
+function disableUserBtn(cpk, user_bet){
+  alert("shit");
+  if (user_bet.localeCompare("1") == 0){
+    document.getElementById("bet".concat("Home").concat(cpk)).disabled = true;
+  }
+  else if (user_bet.localeCompare("X") == 0){
+    document.getElementById("bet".concat("Draw").concat(cpk)).disabled = true;
+  }
+  else {
+    document.getElementById("bet".concat("Away").concat(cpk)).disabled = true;
+  }
 }

@@ -1,4 +1,5 @@
 from django import template
+import time, datetime
 
 register = template.Library()
 
@@ -22,3 +23,18 @@ def get_comp_users(bets, username):
 			return 'You and {0} already placed a bet.'.format(lst[0])
 		else:
 			return 'Only {0} placed a bet.'.format('You')
+
+
+@register.filter(name='get_milli')
+def get_milli(start):
+	tt = start.timetuple()
+	ts = time.mktime(tt)
+	return ts*1000.0
+
+
+@register.filter(name='load_buttons')
+def load_buttons(bets, username):
+	for b in bets:
+		if b.creator.user.username == username:
+			return b.res
+	return '0'

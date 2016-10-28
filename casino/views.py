@@ -235,21 +235,24 @@ def activate_user(request, activation_key):
 # @csrf_exempt
 @login_required(login_url='/login/')
 def place_bet(request):
-	r = request.POST['bet']
-	try:
-		c = Competition.objects.get(pk=int(request.POST['match_pk']))
-		g = Gambler.objects.get(user__username=request.user.username)
-	except:
-		return HttpResponse('Failure')
-	try:
-		similar_bet = Bet.objects.get(creator__user__username=g.user.username, match__pk=c.pk)
-		if similar_bet.res != r:
-			similar_bet.res = r
-			similar_bet.save()
-	except:
-		b = Bet(creator=g, match=c, res=r)
-		b.save()
-	return HttpResponse('success')
+	if request.method=='POST':
+		r = request.POST['bet']
+		try:
+			c = Competition.objects.get(pk=int(request.POST['match_pk']))
+			g = Gambler.objects.get(user__username=request.user.username)
+		except:
+			return HttpResponse('Failure')
+		try:
+			similar_bet = Bet.objects.get(creator__user__username=g.user.username, match__pk=c.pk)
+			if similar_bet.res != r:
+				similar_bet.res = r
+				similar_bet.save()
+		except:
+			b = Bet(creator=g, match=c, res=r)
+			b.save()
+		return HttpResponse('success')
+	else:
+		return HttpResponse('failure')
 
 
 @login_required(login_url='/login/')

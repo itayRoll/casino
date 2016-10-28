@@ -81,11 +81,11 @@ class League(models.Model):
 		return self.name
 
 
-class Group(models.Model):
-	name = models.CharField(max_length=30, blank=True)
-	bets = models.ManyToManyField('Bet')
-	num_gamblers = models.IntegerField(default=0)
-	admins = models.ManyToManyField('Gambler')
+# class Group(models.Model):
+# 	name = models.CharField(max_length=30, blank=True)
+# 	bets = models.ManyToManyField('Bet')
+# 	num_gamblers = models.IntegerField(default=0)
+# 	admins = models.ManyToManyField('Gambler')
 
 
 class Competition(models.Model):
@@ -93,7 +93,7 @@ class Competition(models.Model):
 	home_team = models.ForeignKey('Team', null=True, related_name='home_team', on_delete=models.CASCADE)
 	away_team = models.ForeignKey('Team', null=True, related_name='away_team', on_delete=models.CASCADE)
 	league = models.ForeignKey('League', null=True)
-	groups = models.ManyToManyField('Group')
+	bets = models.ManyToManyField('Bet')
 
 
 	def __str__(self):

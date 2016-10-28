@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'casino',
-    'django_tables2',
 ]
 
 MIDDLEWARE = [
